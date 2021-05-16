@@ -5,22 +5,27 @@ const time = document.getElementById('time'),
     focus = document.getElementById('focus');
 
 //Show Time
-function showTime () {
-    let today = new Date (),
-    hour = today.getHours(),
-    min = today.getMinutes(),
-    sec = today.getSeconds();
+function showTime() {
+    let today = new Date(),
+      hour = today.getHours(),
+      min = today.getMinutes(),
+      sec = today.getSeconds();
+      
+  // Set AM or PM
+  const amPm = hour >= 12 ? 'PM' : 'AM';
 
-    //Set AM or PM
-    const amPM = hoer >= 12 ? 'PM' : 'AM';
+  // 12hr Format
+  hour = hour % 12 || 12;
 
-    //12hr Format
-    hour = hour % 12 || 12;
+  // Output Time
+  time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
 
-    //Output time
-    time.innerHTML = `${hour}<span>:</span>${min}<span>:</span>${sec}`;
+  setTimeout(showTime, 1000);
+}
 
-    setTimeout(showTime, 1000);
+//Add Zeros
+function addZero(n) {
+    return (parseInt(n, 10) < 10 ? '0' : '') + n;
 }
 
 //Run
